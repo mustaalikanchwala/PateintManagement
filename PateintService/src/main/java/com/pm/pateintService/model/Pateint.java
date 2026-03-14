@@ -1,16 +1,24 @@
 package com.pm.pateintService.model;
 
+import com.pm.pateintService.dto.PateintRequest;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Table(name = "patient")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Pateint {
 
     @Id
@@ -29,8 +37,18 @@ public class Pateint {
     private String address;
 
     @NotNull
-    private LocalDateTime dob;
+    private LocalDate dob;
 
     @NotNull
     private LocalDateTime registeredDate;
+
+    public static Pateint toPateint(PateintRequest request){
+        return Pateint.builder()
+                .name(request.name())
+                .email(request.email())
+                .address(request.address())
+                .dob(request.dob())
+                .registeredDate(request.registeredDate())
+                .build();
+    }
 }
