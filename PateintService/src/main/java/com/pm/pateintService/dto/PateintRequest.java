@@ -1,6 +1,7 @@
 package com.pm.pateintService.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.pm.pateintService.dto.validators.CreatePateintValidationGroup;
 import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
@@ -18,12 +19,12 @@ public record PateintRequest(
         @NotBlank(message = "Address is required")
         String address,
 
-        @NotNull(message = "Date of birth is required")
+        @NotNull(groups = CreatePateintValidationGroup.class, message = "Date of birth is required")
         @Past(message = "Date of birth must be in the past")
         @JsonFormat(pattern = "dd-MM-yyyy")
         LocalDate dob,
 
-        @NotNull(message = "Registered date is required")
+        @NotNull(groups = CreatePateintValidationGroup.class, message = "Registered date is required")
         @PastOrPresent(message = "Registered date cannot be in the future")
         @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
         LocalDateTime registeredDate
