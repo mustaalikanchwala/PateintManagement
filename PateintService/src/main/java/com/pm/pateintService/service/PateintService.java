@@ -36,7 +36,7 @@ public class PateintService {
 
     public PateintResponse updatePateint(UUID id,PateintRequest request){
         Pateint pateint = pateintRepository.findById(id).orElseThrow(() -> new PatientNotFoundException("Patient Not found with ID: "+ id ));
-        if( !request.email().equalsIgnoreCase(pateint.getEmail()) && pateintRepository.existsByEmail(request.email())){
+        if( !request.email().equalsIgnoreCase(pateint.getEmail()) && pateintRepository.existsByEmailAndIdNot(request.email(),pateint.getId())){
             throw new EmailAlreadyExistsExcpetion("Email is already Register: "+request.email());
         }
         pateint.setName(request.name());

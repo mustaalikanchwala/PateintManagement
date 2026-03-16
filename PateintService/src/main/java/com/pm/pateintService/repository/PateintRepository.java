@@ -9,4 +9,7 @@ import java.util.UUID;
 @Repository
 public interface PateintRepository extends JpaRepository<Pateint, UUID> {
     boolean existsByEmail(String email);
+
+
+    boolean existsByEmailAndIdNot(String email , UUID id);
 }
