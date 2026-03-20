@@ -46,4 +46,11 @@ public class PateintService {
         return PateintResponse.convertOnePateintToResponse(pateintRepository.save(pateint));
     }
 
+    public void deletePatient(UUID id) {
+        if (!pateintRepository.existsById(id)) {
+            throw new PatientNotFoundException("Patient not found: " + id);
+        }
+        pateintRepository.deleteById(id);
+    }
+
 }

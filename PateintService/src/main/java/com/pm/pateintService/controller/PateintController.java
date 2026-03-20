@@ -35,4 +35,10 @@ public class PateintController {
         return ResponseEntity.ok(pateintService.updatePateint(id,request));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePateint(@PathVariable UUID id){
+        pateintService.deletePatient(id);
+        return ResponseEntity.ok("Patient Deleted SuccessFully");
+    }
+
 }
